@@ -10,10 +10,17 @@
 
       <div id="resultat"></div> <!--Afegim un div on hi posarem el resultat que ens dongui el contador de lletres-->
 
-        <div id="resultatParaules"></div> <!--Div per mostrar les paraules i amb quina lletra començen-->
+
+      <div id="totalParaules"></div>
+
+      <div id="resultatParaules"></div> <!--Div per mostrar les paraules i amb quina lletra començen-->
+
+      
+      <div id="resultatLletres"></div>
+
+      <div id="totalLletresMostrar"></div>
 
 
-        <div id="totalParaules"></div>
 
       </body>
 
@@ -22,11 +29,21 @@
       document.getElementById("enviar").addEventListener("click", function () { /*Aqui agafem els valors del html per treballar amb ells i al fer
         el fer click cridem tota la funcio*/
           
-        let txt = document.getElementById("text").value; // Creem txt on agafem el id del html "text"
+        let txt = document.getElementById("text").value.toLowerCase(); // Creem txt on agafem el id del html "text"
         
         let array = txt.split(""); // creem una variable que es diu array i la dividim per lletres
 
         let contadorlletres = {}; // creem un objecte buit 
+
+             
+        let resultatLletres = document.getElementById("resultatLletres");
+      
+        resultatLletres.innerHTML = "Comptador de lletres:<br><br>";
+
+        totalLletresElement = document.getElementById("totalLletresMostrar");
+
+        totalLletresElement.innerHTML = "";
+
 
         
           array.forEach(function (lletra) { // Creem un foreach on recorrem array
@@ -44,10 +61,16 @@
 
           let resultat = document.getElementById("resultat"); // Agafem el valor de resultat per donar referencia en el html i mostrar-ho
         
+          let totalLletres = 0;
+
 
           for (let lletra in contadorlletres) {
             resultat.innerHTML += lletra + ":" + contadorlletres[lletra] + "<br>" ;
+              totalLletres += contadorlletres[lletra];
           }
+
+          totalLletresElement.innerHTML = "El total de lletres" + totalLletres;
+
 
           //Dividit per per paraules
 
@@ -72,15 +95,14 @@
               }
       });
 
-      
+   
+         
+  
       let resultatParaules = document.getElementById("resultatParaules");
+
+        totalParaulesElement = document.getElementById("totalParaules");
       
-      resultatParaules.innerHTML = "Comptador de paraules:<br><br>";
-
-      totalParaulesElement = document.getElementById("totalParaules");
-
-      totalParaulesElement.innerHTML = "";
-
+          resultatParaules.innerHTML = "Comptador de paraules:<br><br>";
 
 
       let totalParaules = 0;
@@ -104,8 +126,12 @@
 
           resultatParaules.innerHTML += "<br>";
 
-
       });
+
+        
+
+          totalParaulesElement.innerHTML = "";
+      
           totalParaulesElement.innerHTML = "El total de paraules: " + totalParaules;
 
 
