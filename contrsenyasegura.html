@@ -1,46 +1,67 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html lang="es">
+    <html lang="es">
 
-<head>
+    <head>
 
-<title>Contrasenya Segura</title>
+    <title>Contrasenya Segura</title>
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-<div id = "contrasenya"></div>    
+     <div id=car></div>   
 
-<script>
+    
 
-let contrasenya = prompt()
+    <script>
 
-let lacontrasenyasegura = true 
-
-
-
-
+    let contrasenya = prompt()
+        
+    let caracter = document.getElementById("car")
 
 
+    caracter.innerHTML = contrasenya.at(2)
 
-if (lacontrasenyasegura)
-
-{
-let mostrarcontrasenya = document.getElementById("contrasenya")
-
-mostrarcontrasenya.innerHTML = contrasenya
-
-}
-
-
+   //Comprobacio
+    
+    let lacontrasenyasegura = false
+    
+    let vocals = ["a", "e" , "i", "o", "u"]
+    
+    contrasenya = contrasenya.toLowerCase()
 
 
+    for (let i = 0; i < contrasenya.length;i++)
+    {
+        if (vocals.includes(contrasenya[i]))
+    {
+        lacontrasenyasegura = true;
+    }
+    }
 
 
 
-</script>    
+    // Acabarem mostrar
 
-</body>
+    if (lacontrasenyasegura)
+    {
+        alert("La contrasenta compleix amb tot i és segura");
+    }
 
-</html>
+    else 
+    {
+    alert ("La contrasenya no es segura");
+    }
+
+
+
+
+
+
+
+    </script>    
+
+    </body>
+
+    </html>
