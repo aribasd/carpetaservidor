@@ -25,26 +25,74 @@
 
    //Comprobacio
     
-    let lacontrasenyasegura = false
+    let lacontrasenyasegura = true
     
     let vocals = ["a", "e" , "i", "o", "u"]
     
     contrasenya = contrasenya.toLowerCase()
+
+    let algunavocal = false;
 
 
     for (let i = 0; i < contrasenya.length;i++)
     {
         if (vocals.includes(contrasenya[i]))
     {
-        lacontrasenyasegura = true;
+        algunavocal = true;
     }
     }
 
 
+    let consonants =  ["b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z"]
 
+    let contadorVocals = 0;
+
+    let contadorsConsonants = 0;
+
+
+   for (let index = 0; index < contrasenya.length; index++)
+   {
+    if (vocals.includes(contrasenya[index])) {
+    contadorVocals++;
+        if (contadorVocals === 3) {
+    lacontrasenyasegura = false;
+   }
+}
+   else {
+     contadorVocals = 0;
+   }
+
+   if (consonants.includes(contrasenya[index]))
+   {
+    contadorsConsonants++;
+
+    if (contadorsConsonants === 3)
+   {
+    lacontrasenyasegura = false;
+   }
+   }
+   else {
+    contadorsConsonants = 0;
+   }
+}
+
+let primercaracter = contrasenya[0];
+
+for (let j = 1; j < contrasenya.length; j++)
+{
+    if (primercaracter === contrasenya[j] && contrasenya[j] !== "o" && contrasenya[j] !== "e")
+{
+    alert ("No pot tenir dos ocurrències juntes")
+    lacontrasenyasegura = false;
+}
+primercaracter = contrasenya[j];
+}
+
+
+   
     // Acabarem mostrar
 
-    if (lacontrasenyasegura)
+    if (lacontrasenyasegura && algunavocal)
     {
         alert("La contrasenta compleix amb tot i és segura");
     }
@@ -53,6 +101,9 @@
     {
     alert ("La contrasenya no es segura");
     }
+
+
+
 
 
 
