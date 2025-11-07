@@ -10,19 +10,14 @@
 
     <body>
 
-     <div id=car></div>   
 
-    
+    <h1>Comprobant de contrasenya</h1>
 
     <script>
 
+
     let contrasenya = prompt()
         
-    let caracter = document.getElementById("car")
-
-
-    caracter.innerHTML = contrasenya.at(2)
-
    //Comprobacio
     
     let lacontrasenyasegura = true
@@ -42,6 +37,11 @@
     }
     }
 
+    if (algunavocal === false)
+    {
+        alert("Necessita tenir almenys una vocal.")
+    }
+
 
     let consonants =  ["b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z"]
 
@@ -50,12 +50,21 @@
     let contadorsConsonants = 0;
 
 
+    let tetresvocalsjuntes = false;
+
+    let tetresconsonantsjuntes = false;
+
+
    for (let index = 0; index < contrasenya.length; index++)
    {
     if (vocals.includes(contrasenya[index])) {
-    contadorVocals++;
-        if (contadorVocals === 3) {
-    lacontrasenyasegura = false;
+        
+        contadorVocals++;
+    if (contadorVocals === 3) {
+    
+        lacontrasenyasegura = false;
+        tetresvocalsjuntes = true;
+
    }
 }
    else {
@@ -69,6 +78,8 @@
     if (contadorsConsonants === 3)
    {
     lacontrasenyasegura = false;
+    tetresconsonantsjuntes = true;
+
    }
    }
    else {
@@ -76,21 +87,65 @@
    }
 }
 
+
+if (tetresvocalsjuntes)
+{
+ alert("No pot tenir tres vocals juntes");
+}
+
+if (tetresconsonantsjuntes)
+{
+    alert("No pot tenir tres consonants juntes");
+}
+
+
+
+let hihanocurrencies = false;
+
 let primercaracter = contrasenya[0];
 
 for (let j = 1; j < contrasenya.length; j++)
 {
-    if (primercaracter === contrasenya[j] && contrasenya[j] !== "o" && contrasenya[j] !== "e")
+    if (contrasenya[j] === contrasenya[j-1] && contrasenya[j] !== "o" && contrasenya[j] !== "e") {
+
+            lacontrasenyasegura = false;
+             hihanocurrencies = true;
+    }
+}
+
+if (hihanocurrencies)
 {
-    alert ("No pot tenir dos ocurrències juntes")
+ alert("No pot tenir dos ocurrències juntes");
+}
+
+    let contador = contrasenya.length;
+
+    if (contador < 6)
+    {
+     alert("La contrasenya no pot tenir menys de 6 caràcters");
+     lacontrasenyasegura = false;
+    }
+
+    if (contador > 10)
+    {
+        alert("La contrasenya no pot tenir més de 10 caracters")
+        lacontrasenyasegura = false;
+    }
+
+   let teEspais = false;
+    for (let i = 0; i < contrasenya.length; i++) {
+    if (contrasenya[i] === " ") {
+        teEspais = true;
+        }
+    }
+
+    if (teEspais) {
+    alert("La contrasenya no pot contenir espais en blanc.");
     lacontrasenyasegura = false;
-}
-primercaracter = contrasenya[j];
-}
+    }
 
-
-   
-    // Acabarem mostrar
+    
+    // Acabarem mostrant
 
     if (lacontrasenyasegura && algunavocal)
     {
@@ -99,15 +154,8 @@ primercaracter = contrasenya[j];
 
     else 
     {
-    alert ("La contrasenya no es segura");
+    alert ("La contrasenya no és segura");
     }
-
-
-
-
-
-
-
 
 
 
