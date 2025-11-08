@@ -1,0 +1,122 @@
+<html>
+
+<head>
+
+<title>Contraenya Segura Expressions Regulars</title>
+
+</head>
+<body>
+
+
+<script>
+
+
+let contrasenya = prompt();
+
+
+
+let vocals = /[aeiou]/gi;
+
+let tevocals = contrasenya.match(vocals);
+
+
+let boolvocals = false;
+
+if (tevocals)
+
+{
+boolvocals = true;
+}
+
+if (!boolvocals)
+{
+alert("Te que tenir almenys una vocal");
+}
+
+
+let expressiotresvocals = /[aeiou]{3}/gi;
+
+let tresvocals = contrasenya.match(expressiotresvocals);
+
+let sitetresvocals = false;
+
+
+if (tresvocals)
+
+{
+    sitetresvocals = true;
+}
+
+
+if (sitetresvocals)
+{
+    alert("La contrasenya no pot tenir 3 vocals juntes");
+}
+
+let duesocurrencies = /ee|oo/gi;
+
+let teocurrencies = contrasenya.match(duesocurrencies);
+
+
+let tealgunaocurrencia = false;
+
+if (teocurrencies)
+
+{
+tealgunaocurrencia = true;
+}
+
+
+if (tealgunaocurrencia)
+{
+    alert("No pot tenir la ocurrencia ee/oo")
+}
+
+     
+let caracterscorrectes = true;
+
+if (contrasenya.length < 6 )
+{
+    alert("No pot tenir menys de 6 caracters");
+    caracterscorrectes = false;
+}
+
+if (contrasenya.length > 10)
+{
+    alert("No pot tenir més de 10 caracters")
+    caracterscorrectes = false;
+}
+
+
+ let teEspais = false;
+
+    for (let i = 0; i < contrasenya.length; i++) {
+    if (contrasenya[i] === " ") {
+        teEspais = true;
+        }
+    }
+
+    if (teEspais) {
+    alert("La contrasenya no pot contenir espais en blanc.");
+    }
+
+    //Comprovacio final
+
+
+
+    if (boolvocals && !sitetresvocals && !tealgunaocurrencia && caracterscorrectes && !teEspais)
+    {
+        alert("La contrasenya és segura");
+    }
+    else 
+    {
+        alert("La contrasenya no és segura");
+    }
+
+
+
+</script>
+
+</body>
+
+</html>
