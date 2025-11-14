@@ -1,33 +1,47 @@
 <html>
 
 <head>
-
-<title>Data de Naixament</title>    
-
+<title>Data Naixament</title>
 </head>
 
 <body>
 
+    <script>
 
-<section id="data" ></section>    
+let escorrecte = false;
 
-<script>
+let datanaixament;
 
+while (!escorrecte) 
+{
 
-let datanaixament = prompt("Quina és la teva data de naixament, Exemple: 23/4/2006");
+datanaixament = prompt("Quina és la teva data de naixament, Exemple: 23/4/2006");
+    
+let data = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
 
-let data = 
+if (data.test(datanaixament)) 
+{
+escorrecte = true;
+}
 
+else 
+{
+alert("No té el format correcte");
+}
 
-datanaixament = Date(year, month, day )
+}
 
+let parts = datanaixament.split("/");
 
+any = parts[]
 
+let dataDate = new Date(any, mes, dia);
+let diaquevasniexer = dataDate.getDay(); 
 
+const diesSetmana = ["Diumenge","Dilluns","Dimarts","Dimecres","Dijous","Divendres","Dissabte"];
+alert("Vas néixer un " + diesSetmana[diaquevasniexer]);
 
 </script>
-
-
 
 </body>
 
