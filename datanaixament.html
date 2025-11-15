@@ -2,7 +2,7 @@
 
 <head>
 
-<title>Data Naixament</title>
+<title>Data Naixament</title> <!-- Titol  del html -->
 
 </head>
 
@@ -10,49 +10,70 @@
 
 <script>
 
-let escorrecte = false;
+let escorrecte = false; // Boolean escorrecte per saber si el format de la data que li passem es correcte o no.
 
-let datanaixament;
+let datanaixament; // Variable per demanar la data de naixament
 
-while (!escorrecte) 
+while (!escorrecte) // Mentres !escorrecte anar recorreguent el bucle fins posar una data correcte
 {
 
-datanaixament = prompt("Quina és la teva data de naixament, Exemple: 23/4/2006");
+datanaixament = prompt("Quina és la teva data de naixament, Exemple: 23/4/2006"); // Demanaem la data amb un prompt
     
-let data = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+let data = /^\d{1,2}\/\d{1,2}\/\d{4}$/; // Expressio regular perque ens dongui el format correcte
 
-if (data.test(datanaixament)) 
+if (data.test(datanaixament)) // si la datanaixament te el format de data diguem que la booleana es true i sortira del bucle
 {
-escorrecte = true;
+escorrecte = true; // Passem la booleana a true
 }
 
 else 
 {
-alert("No té el format correcte");
+alert("No té el format correcte"); // Si no està be la booleana tornara a repetir el while
 }
 
 }
 
-let parts = datanaixament.split("/");
+let parts = datanaixament.split("/"); // Creem variable parts per separar dies mes i any
 
-dia = parts[0];
-mes = parts[1] -1;
-any = parts[2];
+let dia = Number(parts[0]); 
+let mes = Number(parts[1]) -1;
+let any = Number(parts[2]);
 
+let ladata = new Date(any, mes, dia); // Creem una funcio data amb les dades d'abans
 
-let dataDate = new Date(any, mes, dia);
+let diaquevasniexer = ladata.getDay();  // Agafem el dia que vam neixer amb la funcio getDay
 
-let diaquevasniexer = dataDate.getDay(); 
+let month = ladata.getMonth();
 
-const diesSetmana = ["Diumenge","Dilluns","Dimarts","Dimecres","Dijous","Divendres","Dissabte"];
+let dianascut = ladata.getDate();
 
-let anyactual = new Date().getFullYear();
+let avui = new Date();
 
-let edat = anyactual - any;
+let mesactual = avui.getMonth();
 
-alert("Vas néixer un " + diesSetmana[diaquevasniexer]); 
+let diaactual = avui.getDate();
 
-alert("Tens" + any[anyactual]);
+const diesSetmana = ["Diumenge","Dilluns","Dimarts","Dimecres","Dijous","Divendres","Dissabte"]; // Array amb els dies de la setmana
+
+let anyactual = new Date().getFullYear(); // Agafem l'any actual per despres restar-ho amb el any que vam neixer i saber l'edat
+
+let edat = anyactual - any; // Creem edat que es l'any actual menys el any
+
+alert("Vas néixer un " + diesSetmana[diaquevasniexer]);  // Mostrem el dia que va neixer
+
+if (month > mesactual || (month === mesactual && dianascut > diaactual)) 
+{
+    alert("Tens " + (edat - 1) + " anys");
+}
+else if (month === mesactual && dianascut === diaactual) 
+{
+    alert("Felicitats avui es el teu cumple, Tens " + edat + " anys"); 
+} 
+else 
+{
+    alert("Tens " + edat + " anys"); 
+}
+
 
 </script>
 
