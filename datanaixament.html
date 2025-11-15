@@ -1,12 +1,14 @@
 <html>
 
 <head>
+
 <title>Data Naixament</title>
+
 </head>
 
 <body>
 
-    <script>
+<script>
 
 let escorrecte = false;
 
@@ -33,13 +35,24 @@ alert("No té el format correcte");
 
 let parts = datanaixament.split("/");
 
-any = parts[]
+dia = parts[0];
+mes = parts[1] -1;
+any = parts[2];
+
 
 let dataDate = new Date(any, mes, dia);
+
 let diaquevasniexer = dataDate.getDay(); 
 
 const diesSetmana = ["Diumenge","Dilluns","Dimarts","Dimecres","Dijous","Divendres","Dissabte"];
-alert("Vas néixer un " + diesSetmana[diaquevasniexer]);
+
+let anyactual = new Date().getFullYear();
+
+let edat = anyactual - any;
+
+alert("Vas néixer un " + diesSetmana[diaquevasniexer]); 
+
+alert("Tens" + any[anyactual]);
 
 </script>
 
