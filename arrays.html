@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang = "ca">
+
+<head>
+    <title>Arrays</title>
+</head>
+
+<body>
+
+    <script>
+    
+    console.log("hola");
+
+    let contingut = prompt("Dona'm tres números entre el 1 i el 9 separatas per comes");
+
+    let expressiotresvocals = /^[1-9](,[1-9]){2,}$/;
+
+    let compleix = false;
+
+    if (contingut.match(expressiotresvocals))
+    {
+        compleix = true;
+    }
+
+    if (compleix)
+    {
+        alert("Es correcte");
+    }
+    
+    else {
+        
+        alert("No es correcte");
+    }
+
+
+
+    // Te el numero 3 en el array
+         
+        let arrayseparatdecomes = contingut.split(",");
+
+
+        let arraytres = [];
+
+        let posicions = [];
+
+        for (let i = 0;  i < arrayseparatdecomes.length ; i++)
+        {
+         
+            if (Number(arrayseparatdecomes[i]) === 3) {
+            arraytres.push(arrayseparatdecomes[i]);
+            posicions.push(i);
+            }
+        }
+
+         console.log("S'ha trobat el 3 a les posicions: " + posicions.join(", "));
+
+
+
+
+
+    // Elimina els elements repetits
+
+    
+    const numerosnorepetit = [];
+
+
+        for (let x = 0; arraytres.length > x ; x++)
+    {
+        if (!numerosnorepetit.includes(arraytres[x]))
+    {
+        numerosnorepetit.push(arraytres[x]);
+    }
+
+    }
+
+    console.log("Array sense repetits: " + numerosnorepetit.join(", "));
+
+
+    //Ordenar de petit a gran
+
+    numerosnorepetit.sort((a,b) => a - b);
+
+    console.log("Array ordenat de petit a gran: " + numerosnorepetit.join(", "));
+
+
+    
+
+    // Afegir o treue elements d'un array
+
+
+     let total = numerosnorepetit.length;
+
+
+     if (total % 2 !== 0)
+     {
+        numerosnorepetit.shift();
+        numerosnorepetit.pop();
+        
+        console.log("Nombre imparell: s'ha afegit 0 al principi -> " + numerosnorepetit.join(", "));
+
+     }
+
+     else {
+        numerosnorepetit.unshift(0);
+        
+        console.log("Nombre parell: s'han eliminat el primer i l'últim element -> " + numerosnorepetit.join(", "));
+
+     }
+
+
+    //  Partir el array en dos
+
+
+    let totalpercadaarray = numerosnorepetit.length /2;
+
+
+    let arraynumerospetits = numerosnorepetit.slice(0,totalpercadaarray);
+
+    let arraynumerosgrans = numerosnorepetit.slice(totalpercadaarray);
+
+    console.log("Primera meitat (petits): " + arraynumerospetits.join(", "));
+    
+    console.log("Segona meitat (grans): " + arraynumerosgrans.join(", "));
+
+
+
+     // Ordenar de  valors de més gran a més petits
+
+   
+     let arraynumerosgransordenat = arraynumerosgrans.sort((a,b) => b-a );
+
+     console.log("Segona meitat ordenada de gran a petit: " + arraynumerosgransordenat.join(", "));
+
+
+    // Crear un nou array
+    
+     let ajuntararray = arraynumerospetits.concat(arraynumerosgransordenat);
+    
+     console.log("Array combinat: " + ajuntararray.join(", "));
+
+
+
+     
+
+    </script>
+
+</body>
+</html>
