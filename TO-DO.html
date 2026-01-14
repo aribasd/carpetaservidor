@@ -1,71 +1,71 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html>
+    <html>
 
-<head>
+    <head>
 
-<link rel="stylesheet" href="/Estil.css">
+    <link rel="stylesheet" href="/Estil.css">
 
-</head>
-
-
-<body>
-
-<div class = "formulariCss">
-
-<form id="formTasca">
-    <label for="Títol" class = "botoformulari">Títol</label><br>
-    <input type="text" id="Títol" name="Títol"><br><br>
-
-    <label for="Descripció">Descripció</label><br>
-    <textarea id="Descripció" name="Descripció"></textarea><br><br>
-
-    <label for="Data">Data</label><br>
-    <input type="date" id="Data" name="Data"><br><br>
-
-    <label>Feta</label>
-    <input type="checkbox" id="Feta"><br><br>
-    <br>
-
-    <button type="submit">Enviar Tasca</button>
-
-</form>
-
-</diV>
-
-<div id="MostrarTasca" class = "requadreTasca"></div>
+    </head>
 
 
-<script>
-const formulari = document.getElementById("formTasca");
-const mostrarDiv = document.getElementById("MostrarTasca");
+    <body>
 
-formulari.addEventListener("submit", function(e) {
-    
-    e.preventDefault();
+    <div class = "formulariCss">
 
-    const titol = document.getElementById("Títol").value;
-    const descripcio = document.getElementById("Descripció").value;
-    const data = document.getElementById("Data").value;
-    const feta = document.getElementById("Feta").checked ? "Si" : "No";
+    <form id="formTasca">
+        <label for="Títol" class = "botoformulari">Títol</label><br>
+        <input type="text" id="Títol" name="Títol"><br><br>
 
-    const tasca = document.createElement("div");
-    tasca.className = "tasca";
+        <label for="Descripció">Descripció</label><br>
+        <textarea id="Descripció" name="Descripció"></textarea><br><br>
+
+        <label for="Data">Data</label><br>
+        <input type="date" id="Data" name="Data"><br><br>
+
+        <label>Feta</label>
+        <input type="checkbox" id="Feta"><br><br>
+        <br>
+
+        <button type="submit">Enviar Tasca</button>
+
+    </form>
+
+    </diV>
+
+    <div id="MostrarTasca" class = "requadreTasca"></div>
 
 
-    tasca.innerHTML = `
-        <h3>${titol}</h3>
-        <p><strong>Descripció:</strong> ${descripcio}</p>
-        <p><strong>Data:</strong> ${data}</p>
-        <p><strong>Feta?</strong> ${feta}</p>
-        <hr>
-    `;
-    
-    mostrarDiv.appendChild(tasca); // Afegir un element com a fill d’un altre element. Es a dir va afegint les tasques sense elimnar les anteriors, pots anar fent com una llista.
+    <script>
+    const formulari = document.getElementById("formTasca");
+    const mostrarDiv = document.getElementById("MostrarTasca");
 
-});
-</script>
+    formulari.addEventListener("submit", function(e) {
+        
+        e.preventDefault();
 
-</body>
+        const titol = document.getElementById("Títol").value;
+        const descripcio = document.getElementById("Descripció").value;
+        const data = document.getElementById("Data").value;
+        const feta = document.getElementById("Feta").checked ? "Si" : "No";
 
-</html>
+        const tasca = document.createElement("div");
+        tasca.className = "tasca";
+
+
+        tasca.innerHTML = `
+            <h3>${titol}</h3>
+            <p><strong>Descripció:</strong> ${descripcio}</p>
+            <p><strong>Data:</strong> ${data}</p>
+            <p><strong>Feta?</strong> ${feta}</p>
+            <hr>
+        `;
+        
+        mostrarDiv.appendChild(tasca); // Afegir un element com a fill d’un altre element. Es a dir va afegint les tasques sense elimnar les anteriors, pots anar fent com una llista.
+
+    });
+    </script>
+
+    </body>
+
+    </html>
