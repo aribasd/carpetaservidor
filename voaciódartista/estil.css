@@ -1,0 +1,11 @@
+.contingut {
+    height: 720px;
+    background-color: rgb(var(--color-vermell), var(--color-verd), var(--color-blau));
+}
+
+.colorPerCopiar {
+    box-sizing: border-box;
+    text-align: center;
+    width: 200px;
+    background-color: green;
+}

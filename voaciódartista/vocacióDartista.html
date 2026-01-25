@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vocació d'Artista</title>
+  <link rel="stylesheet" href="estil.css">
+</head>
+<body>
+
+<div class="contingut">
+
+  <form>
+    <label>Vermell</label>
+    <span id="valorRed">0</span><br>
+    <input type="range" id="red" min="0" max="255" value="0"><br>
+
+    <label>Verd</label>
+    <span id="valorGreen">0</span><br>
+    <input type="range" id="green" min="0" max="255" value="0"><br>
+
+    <label>Blau</label>
+    <span id="valorBlue">0</span><br>
+    <input type="range" id="blue" min="0" max="255" value="0"><br><br>
+  </form>
+
+  <div class="colorPerCopiar">
+    <h2>Ha de ser el mateix color que el fons</h2>
+  </div>
+
+  <button id="botonRandom" style="display:none;">
+    Reiniciar color aleatori
+  </button>
+
+</div>
+
+<script>
+  const red = document.getElementById("red");
+  const green = document.getElementById("green");
+  const blue = document.getElementById("blue");
+
+  const valorRed = document.getElementById("valorRed");
+  const valorGreen = document.getElementById("valorGreen");
+  const valorBlue = document.getElementById("valorBlue");
+
+  const contingut = document.querySelector(".contingut");
+  const colorPerCopiar = document.querySelector(".colorPerCopiar");
+  const botoRandom = document.getElementById("botonRandom");
+
+  function actualitzarColor() {
+    document.documentElement.style.setProperty("--color-vermell", red.value);
+    document.documentElement.style.setProperty("--color-verd", green.value);
+    document.documentElement.style.setProperty("--color-blau", blue.value);
+  }
+
+  function actualitzarValors() {
+    valorRed.textContent = red.value;
+    valorGreen.textContent = green.value;
+    valorBlue.textContent = blue.value;
+  }
+
+  function comprovarColor() {
+    const fons = getComputedStyle(contingut).backgroundColor;
+    const cartell = getComputedStyle(colorPerCopiar).backgroundColor;
+
+    if (fons === cartell) {
+      botoRandom.style.display = "block";
+    } else {
+      botoRandom.style.display = "none";
+    }
+  }
+
+  function random255() {
+    return Math.floor(Math.random() * 256);
+  }
+
+  red.addEventListener("input", () => {
+    actualitzarValors();
+    actualitzarColor();
+    comprovarColor();
+  });
+
+  green.addEventListener("input", () => {
+    actualitzarValors();
+    actualitzarColor();
+    comprovarColor();
+  });
+
+  blue.addEventListener("input", () => {
+    actualitzarValors();
+    actualitzarColor();
+    comprovarColor();
+  });
+
+  botoRandom.addEventListener("click", () => {
+    red.value = random255();
+    green.value = random255();
+    blue.value = random255();
+
+    actualitzarValors();
+    actualitzarColor();
+    botoRandom.style.display = "none";
+  });
+</script>
+
+</body>
+</html>
