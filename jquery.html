@@ -1,0 +1,107 @@
+<html>
+
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="jquery.css">
+<title>ITV</title>
+</head>
+
+<body>
+
+<form id="formulari" class="formulari-itv">
+  <div class="camp">
+    <label for="nomPropietari" class="etiqueta">Nom del propietari</label>
+    <input type="text" id="nomPropietari" class="input-text" required>
+    <span class="error" id="error-nom"></span>
+  </div>
+
+  <div class="camp">
+    <label for="email" class="etiqueta">Email</label>
+    <input type="email" id="email" class="input-text" required>
+    <span class="error" id="error-email"></span>
+  </div>
+
+  <div class="camp">
+    <label for="vehicle" class="etiqueta">Tipus de vehicle</label>
+    <select id="vehicle" class="input-select" required>
+        <option value="moto49">Moto (49cc)</option>
+        <option value="moto125">Moto (125cc) o més cc</option>
+        <option value="cotxe">Cotxe</option>
+        <option value="tractor">Tractor</option>
+    </select>
+    <span class="error" id="error-vehicle"></span>
+  </div>
+
+  <div class="camp">
+    <label for="edat" class="etiqueta">Edat</label>
+    <input type="number" id="edat" class="input-text">
+    <span class="error" id="error-edat"></span>
+  </div>
+
+  <div class="camp">
+    <label for="data" class="etiqueta">Data</label>
+    <input type="date" id="data" class="input-text">
+    <span class="error" id="error-data"></span>
+  </div>
+
+  <div class="camp">
+    <label for="matricula" class="etiqueta">Matrícula</label>
+    <input type="text" id="matricula" class="input-text">
+    <span class="error" id="error-matricula"></span>
+  </div>
+
+  <button id="boto" class="boto-enviar" type="submit">Enviar</button>
+
+</form>
+
+<script>
+let valid = true;
+
+$(document).ready(function () {
+  $("#formulari").submit(function (e) {
+
+    valid = true;
+
+    let edat = parseInt($("#edat").val());
+    let vehicle = $("#vehicle").val();
+    let nomPropietari = $("#nomPropietari").val();
+    let data = $("#data").val();
+    let matricula = $('#matricula').val();
+
+    if (vehicle === "moto49" && edat < 16) valid = false;
+    else if (vehicle !== "moto49" && edat < 18) valid = false;
+
+    let dataSeleccionada = new Date(data);
+    let avui = new Date();
+    avui.setHours(0,0,0,0);
+
+    if (dataSeleccionada <= avui) valid = false;
+
+    let expressioCotxe = /^\d{4}[A-Z]{3}$/i;
+    let expressioMoto = /^[A-Z]\d{4}[A-Z]{3}$/i;
+
+    if (vehicle === "moto49") {
+        if (!expressioMoto.test(matricula)) valid = false;
+    } else {
+        if (!expressioCotxe.test(matricula)) valid = false;
+    }
+
+    let preu = 0;
+    if (vehicle === "moto49") preu = 20;
+    if (vehicle === "moto125") preu = 27;
+    if (vehicle === "cotxe") preu = 42;
+    if (vehicle === "tractor") preu = 61;
+
+    $("#boto").prop("disabled", !valid);
+
+    if (!valid) e.preventDefault();
+    else {
+        let vehicleText = $("#vehicle option:selected").text();
+        alert(`${nomPropietari}, tens hora a passar la ITV, a data de ${data}, del teu vehicle ${vehicleText} amb la matrícula ${matricula}, amb un cost de ${preu}€.`);
+    }
+  });
+});
+</script>
+
+</body>
+</html>

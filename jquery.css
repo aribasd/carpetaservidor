@@ -1,0 +1,91 @@
+/* Configuración General */
+body {
+    background-color: #0f172a; /* Azul oscuro casi negro */
+    color: #f8fafc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor del Formulario */
+.formulari-itv {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px); /* Efecto cristal */
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Etiquetas */
+.etiqueta {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #38bdf8; /* Color azul neón suave */
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Inputs y Selects */
+.camp {
+    margin-bottom: 20px;
+}
+
+.input-text, .input-select {
+    width: 100%;
+    padding: 12px;
+    background: #0f172a;
+    border: 2px solid #334155;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    box-sizing: border-box; /* Para que no se salga del contenedor */
+    transition: all 0.3s ease;
+}
+
+.input-text:focus, .input-select:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* Botón Enviar */
+.boto-enviar {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+}
+
+.boto-enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+}
+
+.boto-enviar:disabled {
+    background: #475569;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Errores */
+.error {
+    color: #fb7185;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
+}   
