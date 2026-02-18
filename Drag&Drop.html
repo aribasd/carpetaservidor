@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop: Ordena els números</title>
+    <link rel="stylesheet" href="Drag&Drop.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<nav id = "capçalera">
+<h1>Ordena els números de menor a major</h1>
+<p>Arrossega els números fins a col·locar-los en ordre correcte.</p>
+</nav>
+
+<br>
+<br>
+<div id="container">
+    <div class="primer" draggable="true"></div>
+    <div class="segon" draggable="true"></div>
+    <div class="tercer" draggable="true"></div>
+    <div class="quart" draggable="true"></div>
+    <div class="cinque" draggable="true"></div>
+</div>
+
+<div id="missatge"></div>
+
+<script>
+$(document).ready(function () {
+
+    // Generar números aleatoris únics entre 1 i 99
+    let numeros = [];
+
+    while(numeros.length < 5){
+        let n = Math.floor(Math.random()*99)+1; // Li donem un valor ransom a n
+        if(!numeros.includes(n)) numeros.push(n); // Aqui fem que si numero no inclueix  el includes n doncs afegim el numero al array
+    }
+
+    // Posar números dins de les caixes segons les seves classes
+    $('.primer').text(numeros[0]);
+    $('.segon').text(numeros[1]);
+    $('.tercer').text(numeros[2]);
+    $('.quart').text(numeros[3]);
+    $('.cinque').text(numeros[4]);
+
+    // Drag & Drop
+    let dragged;
+
+    $('#container div').on('dragstart', function(){
+        dragged = this;
+        $(this).css('opacity','0.5');
+    });
+
+    $('#container div').on('dragend', function(){
+        $(this).css('opacity','1');
+    });
+
+    $('#container div').on('dragover', function(e){
+        e.preventDefault();
+    });
+
+    $('#container div').on('drop', function(e){
+        e.preventDefault();
+        if(dragged != this){
+            // Intercanviar text
+            let temp = $(this).text();
+            $(this).text($(dragged).text());
+            $(dragged).text(temp);
+
+            // Comprovar si està ordenat
+            let valors = [
+                parseInt($('.primer').text()),
+                parseInt($('.segon').text()),
+                parseInt($('.tercer').text()),
+                parseInt($('.quart').text()),
+                parseInt($('.cinque').text())
+            ];
+
+            let ordenat = true; // Booleana per dir si esta ordenat
+
+            for(let i=0; i< valors.length-1; i++){ // Fem un bucle
+                if(valors[i] > valors[i+1]){ // Comparem el primer valor amb el seguent, en cas de que sigui més gran el primer no estan ordenats.
+                    ordenat = false;
+                    break;
+                }
+            }
+
+            if(ordenat){
+                $('#missatge').html('<h1>Els números estan ordenats</h1>');
+            } else {
+                $('#missatge').text('');
+            }
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>
