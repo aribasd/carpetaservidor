@@ -1,0 +1,20 @@
+html, body {
+    margin: 0;  
+    padding: 0;    
+    height: 100%;  
+    width: 100%; 
+}
+
+.pisarra {
+    background-color: rgb(0, 79, 14);
+    margin-bottom: 10px;
+}
+
+.afegirPunt {
+    background-color: gray;
+    margin-top: 10px;
+}
+
+.fomrulari {
+    margin-top: 10px;
+}

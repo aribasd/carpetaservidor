@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura</title>
+    <link rel="stylesheet" href="classesPunts.css">
+</head>
+
+<body>
+
+    <div class="pisarra">
+
+        <canvas id="myCanvas" width="600" height="600"></canvas>
+
+
+
+        <div class="afegirPunt">
+            
+            <div class="formulari">
+                
+            <form>
+                <label>Horitzontal</label>
+                <input type="number" id="x" placeholder="Horitzontal">
+                <label>Vertical</label>
+                <input type="number" id="y" placeholder="Vertical">
+
+                <button type="button" onclick="afegirPuntHTML()">Afegir Punt</button>
+
+            </form>
+
+            </div>
+
+            <!-- ----------------- -->
+            <br>
+            <br>
+
+            <form>
+                <label>Mostra figura</label>
+
+                <button type="button" onclick="mostrarFigura()">Mostrar Figura</button>
+
+            </form>
+        </div>
+
+    </div>
+
+
+
+    <!-- Moure Figura  -->
+
+
+    <!-- Dibujar Figura  -->
+
+    <script>
+
+        class Punt2D {
+
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+
+            mourePunt(dx, dy) {
+                this.x += dx;
+                this.y += dy;
+            }
+        }
+
+        class Geometrica {
+
+            constructor() {
+                this.arrayPunts2D = [];
+            }
+
+            afegirPunts2D(punt) {
+                this.arrayPunts2D.push(punt);
+            }
+
+            mostrarPunts(ctx) {
+
+                ctx.beginPath();
+
+                if (this.arrayPunts2D.length > 0) {
+
+                    ctx.moveTo(this.arrayPunts2D[0].x, this.arrayPunts2D[0].y);
+
+                    for (let i = 1; i < this.arrayPunts2D.length; i++) {
+                        ctx.lineTo(this.arrayPunts2D[i].x, this.arrayPunts2D[i].y);
+                    }
+
+                    ctx.stroke();
+                }
+            }
+        }
+
+        const figura = new Geometrica();
+
+        function afegirPuntHTML() {
+
+            const x = parseInt(document.getElementById("x").value);
+            const y = parseInt(document.getElementById("y").value);
+
+            const punt = new Punt2D(x, y);
+
+            figura.afegirPunts2D(punt);
+        }
+
+        function mostrarFigura() {
+
+            const c = document.getElementById("myCanvas");
+            const ctx = c.getContext("2d");
+
+            figura.mostrarPunts(ctx);
+        }
+
+    </script>
+
+</body>
+
+</html>
