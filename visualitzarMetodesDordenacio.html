@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<title>GEO</title>
+</head>
+
+<body>
+
+<canvas id="canvas" width="600" height="600"></canvas>
+
+<br><br>
+
+<input type="number" id="quantitat" placeholder="Quantitat">
+<input type="number" id="temps" placeholder="Temps ms">
+<input type="number" id="mida" placeholder="Mida punt">
+
+<br><br>
+
+<button onclick="geo()">Generar punts</button>
+<button onclick="ordenarY()">Ordenar Y</button>
+<button onclick="netejar()">Netejar</button>
+
+<script>
+
+class Punt2D {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Geometrica {
+    constructor() {
+        this.punts = [];
+    }
+
+    afegir(p) {
+        this.punts.push(p);
+    }
+}
+
+const figura = new Geometrica();
+
+function geo() {
+    let q = parseInt(document.getElementById("quantitat").value);
+
+    for (let i = 0; i < q; i++) {
+        let x = Math.floor(Math.random() * 600);
+        let y = Math.floor(Math.random() * 600);
+
+        figura.afegir(new Punt2D(x, y));
+    }
+
+    dibuixar();
+}
+
+function dibuixar(i=-1, j=-1) {
+    let c = document.getElementById("canvas");
+    let ctx = c.getContext("2d");
+    let mida = parseInt(document.getElementById("mida").value) || 5;
+
+    ctx.clearRect(0,0,600,600);
+
+    for (let k = 0; k < figura.punts.length; k++) {
+
+        let p = figura.punts[k];
+
+        ctx.beginPath();
+
+        if (k == i || k == j) {
+            ctx.fillStyle = "red";
+        } else {
+            ctx.fillStyle = "black";
+        }
+
+        ctx.arc(p.x, p.y, mida, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function netejar() {
+    figura.punts = [];
+    dibuixar();
+}
+
+const esperar = (ms) => new Promise(r => setTimeout(r, ms));
+
+async function ordenarY() {
+
+    let t = parseInt(document.getElementById("temps").value) || 100;
+    let arr = figura.punts;
+
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - 1; j++) {
+
+            dibuixar(j, j+1);
+            await esperar(t);
+
+            if (arr[j].y > arr[j+1].y) {
+                let temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+
+    dibuixar();
+}
+
+</script>
+
+</body>
+</html>

@@ -11,8 +11,10 @@ html, body {
 }
 
 .afegirPunt {
+    display: flex;
     background-color: gray;
     margin-top: 10px;
+    flex-direction: row;
 }
 
 .fomrulari {
