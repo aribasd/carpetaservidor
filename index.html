@@ -1,163 +1,316 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Index Professional Dashboard</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: 'Inter', sans-serif;
+        background: #121212;
+        color: #f3f4f6;
+        padding: 2rem;
+        line-height: 1.5;
+    }
 
-    <!-- Estils principals -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/app.c5942638.css">
+    header h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #facc15;
+        text-shadow: 1px 1px 5px #000;
+        margin-bottom: 3rem;
+    }
 
-    <title>Index</title>
+    h2.bloc-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #fbbf24;
+        border-bottom: 2px solid #fbbf24;
+        padding-bottom: 0.5rem;
+    }
+
+    .sections {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .card {
+        position: relative;
+        padding: 1.5rem;
+        border-radius: 12px;
+        background: #1f2937;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card:hover {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    }
+
+    .card::before {
+        content:'';
+        position: absolute;
+        width: 150%;
+        height: 150%;
+        top: -25%;
+        left: -25%;
+        background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(34,197,94,0.15));
+        transform: rotate(25deg);
+        z-index: 0;
+    }
+
+    .card-header {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+        z-index: 1;
+        color: #fcd34d;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .badge {
+        background: #f59e0b;
+        color: #1f2937;
+        padding: 0.2rem 0.5rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: bold;
+    }
+
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+    }
+
+    a {
+        text-decoration: none;
+        color: #f3f4f6;
+        padding: 0.3rem 0.5rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        margin-bottom: 0.3rem;
+    }
+
+    a:hover {
+        background: #f59e0b;
+        color: #1f2937;
+        transform: translateX(5px);
+    }
+
+    .sub-div {
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        background: #374151;
+        border-radius: 6px;
+        font-size: 0.9rem;
+    }
+
+    .icon {
+        margin-right: 0.5rem;
+    }
+
+</style>
 </head>
+<body>
+<header>
+    <h1>Benvinguts a la Meva Pàgina Web</h1>
+</header>
 
-<body class="cos-pagina">
+<main>
 
-    <!-- CAPÇALERA -->
-    <header class="capcalera">
-        <h1 class="titol-principal">Benvinguts a La Meva Pàgina Web</h1>
-    </header>
+    <!-- BLOC 1 -->
+    <div class="bloc">
+        <h2 class="bloc-title">BLOC 1 - ESTRUCTURES</h2>
+        <div class="sections">
 
-    <hr class="separador">
+            <div class="card">
+                <div class="card-header">
+                    <span>📊 Estructures de Control</span>
+                    <span class="badge">5 items</span>
+                </div>
+                <div class="card-content">
+                    <a href="ExercicisEstructureControl.html">Estructures 1</a>
+                    <a href="EstrcturesControl2.html">Estructures 2</a>
+                    <a href="EstructureControl3.html">Estructures 3</a>
+                    <a href="EstructureControl4.html">Estructures 4</a>
+                    <div class="sub-div">Sub-div: informació addicional amb tips</div>
+                    <div class="sub-div">Sub-div: notes de repàs</div>
+                </div>
+            </div>
 
-    <!-- ESTRUCTURES DE CONTROL -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Estructures de Control</h1>
+            <div class="card">
+                <div class="card-header">
+                    <span>🔒 Contrasenya Segura</span>
+                    <span class="badge">2 variants</span>
+                </div>
+                <div class="card-content">
+                    <a href="contrsenyasegura.html">Contrasenya Segura</a>
+                    <a href="contrsenyasegura.html">Amb Expressions Regulars</a>
+                    <div class="sub-div">Tip: reforça seguretat amb símbols</div>
+                </div>
+            </div>
 
-        <nav class="llista-enllacos">
-            <a class="enllac" href="ExercicisEstructureControl.html">Estructures 1</a><br><br>
-            <a class="enllac" href="EstrcturesControl2.html">Estructures 2</a><br><br>
-            <a class="enllac" href="EstructureControl3.html">Estructures 3</a><br><br>
-            <a class="enllac" href="EstructureControl4.html">Estructures 4</a>
-        </nav>
-    </section>
+            <div class="card">
+                <div class="card-header">
+                    <span>📅 Data de Naixement</span>
+                    <span class="badge">1 item</span>
+                </div>
+                <div class="card-content">
+                    <a href="datanaixament.html">La data de naixement</a>
+                    <div class="sub-div">Sub-div: recordar aniversaris especials</div>
+                </div>
+            </div>
 
-    <hr class="separador">
+            <div class="card">
+                <div class="card-header">
+                    <span>🗂 Arrays</span>
+                    <span class="badge">1 item</span>
+                </div>
+                <div class="card-content">
+                    <a href="arrays.html">Arrays</a>
+                    <div class="sub-div">Sub-div amb informació extra</div>
+                </div>
+            </div>
 
-    <!-- CONTRASENYA SEGURA -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Contrasenya Segura</h1>
+        </div>
+    </div>
 
-        <a class="enllac" href="contrsenyasegura.html">Contrasenya Segura</a><br><br>
-        <a class="enllac" href="contrsenyasegura.html"> Contrasenya Segura amb Expressions Regulars</a>
-    </section>
+    <!-- BLOC 2 -->
+    <div class="bloc">
+        <h2 class="bloc-title">BLOC 2 - TOOLS</h2>
+        <div class="sections">
 
-    <hr class="separador">
+            <div class="card">
+                <div class="card-header">
+                    <span>✅ To Do</span>
+                    <span class="badge">1 item</span>
+                </div>
+                <div class="card-content">
+                    <a href="TO-DO.html">To Do</a>
+                    <div class="sub-div">Prioritats destacades</div>
+                </div>
+            </div>
 
-    <!-- DATA DE NAIXEMENT -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Data de Naixement</h1>
+            <div class="card">
+                <div class="card-header">
+                    <span>🎨 Vocació d'Artista</span>
+                    <span class="badge">1 projecte</span>
+                </div>
+                <div class="card-content">
+                    <a href="voaciódartista/vocacióDartista.html">Vocació d'artista</a>
+                    <div class="sub-div">Projectes artístics</div>
+                    <div class="sub-div">Inspiració i notes</div>
+                </div>
+            </div>
 
-        <a class="enllac" href="datanaixament.html">La data de naixement</a>
-    </section>
+            <div class="card">
+                <div class="card-header">
+                    <span>🛠 ITV</span>
+                    <span class="badge">1 test</span>
+                </div>
+                <div class="card-content">
+                    <a href="jquery.html">ITV</a>
+                    <div class="sub-div">Comprovacions i informes</div>
+                </div>
+            </div>
 
-    <hr class="separador">
+            <div class="card">
+                <div class="card-header">
+                    <span>🖱 Drag&Drop</span>
+                    <span class="badge">1 zona</span>
+                </div>
+                <div class="card-content">
+                    <a href="Drag&Drop.html">Drag&Drop</a>
+                    <div class="sub-div">Zones interactives</div>
+                    <div class="sub-div">Sub-div addicional</div>
+                </div>
+            </div>
 
-    <!-- ARRAYS -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Arrays</h1>
+        </div>
+    </div>
 
-        <a class="enllac" href="arrays.html">Arrays</a>
-    </section>
+    <!-- BLOC 3 -->
+    <div class="bloc">
+        <h2 class="bloc-title">BLOC 3 - OBJECTES I CLASSES</h2>
+        <div class="sections">
+            <div class="card">
+                <div class="card-header">
+                    <span>📦 Objectes</span>
+                    <span class="badge">1 item</span>
+                </div>
+                <div class="card-content">
+                    <a href="/Objectes/objectes.html">Comprovar DNI</a>
+                    <div class="sub-div">Informació addicional</div>
+                </div>
+            </div>
 
-    <hr class="separador">
+            <div class="card">
+                <div class="card-header">
+                    <span>📚 Classes i Objectes</span>
+                    <span class="badge">1 item</span>
+                </div>
+                <div class="card-content">
+                    <a href="classesPunts.html">Classes i Punts</a>
+                    <div class="sub-div">Detalls sobre les classes</div>
+                    <div class="sub-div">Sub-div addicional</div>
+                </div>
+            </div>
 
-    <!-- TO DO -->
-    <section class="seccio">
-        <h1 class="titol-seccio">To Do</h1>
+            <div class="card">
+                <div class="card-header">
+                    <span>⚙ Visualitza Metodes d'Ordednació</span>
+                    <span class="badge">1 item</span>
+                </div>
+                <div class="card-content">
+                    <a href="visualitzarMetodesDordenacio.html">Ordenació</a>
+                    <div class="sub-div">Sub-div amb consells</div>
+                    <div class="sub-div">Mini-tips</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <a class="enllac" href="TO-DO.html">To Do</a>
-    </section>
+    <!-- BLOC 4 -->
+    <div class="bloc">
+        <h2 class="bloc-title">BLOC 4 - VUE PROJECTS</h2>
+        <div class="sections">
 
-    <hr class="separador">
+            <div class="card">
+                <div class="card-header">
+                    <span>🌐 VUE APP</span>
+                    <span class="badge">Projecte</span>
+                </div>
+                <div class="card-content">
+                    <a href="dist/index.html">Exercici VUE1/VUE2</a>
+                    <div class="sub-div">Projectes Vue</div>
+                    <div class="sub-div">Documentació</div>
+                </div>
+            </div>
 
-    <!-- VUE APP -->
-    <section class="seccio">
-        <h1 class="titol-seccio">VUE</h1>
+            <div class="card">
+                <div class="card-header">
+                    <span>📜 Directives VUE</span>
+                    <span class="badge">Projecte</span>
+                </div>
+                <div class="card-content">
+                    <a href="distDirectives/index.html">Ordenació</a>
+                    <div class="sub-div">Directives Vue</div>
+                    <div class="sub-div">Mini-tutorial</div>
+                </div>
+            </div>
 
-        <a href="dist/index.html">Exercici VUE1/VUE2</a>
-        
-    </section>
-                <!-- VUE DIRECTIVES -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Visualitza Metodes d'Ordednació</h1>
+        </div>
+    </div>
 
-        <a  href="distDirectives/index.html">Ordenació</a>
-    </section>
-
-
-    <!-- VOCACIÓ D'ARTISTA -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Vocació d'Artista</h1>
-
-        <a class="enllac" href="voaciódartista/vocacióDartista.html">
-            Vocació d'artista
-        </a>
-    </section>
-
-    <hr class="separador">
-
-    <!-- FACTURES -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Factures</h1>
-
-        <a class="enllac" href="Factura.html">Factura Producte</a>
-    </section>
-
-    <hr class="separador">
-
-    <!-- ITV -->
-    <section class="seccio">
-        <h1 class="titol-seccio">ITV</h1>
-
-        <a class="enllac" href="jquery.html">ITV</a>
-    </section>
-
-        <hr class="separador">
-
-    <!-- Drag&Drop -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Drag&Drop</h1>
-
-        <a class="enllac" href="Drag&Drop.html">Drag&Drop</a>
-    </section>
-    
-    <hr class="separador">
-    
-    <!-- Objectes -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Objectes</h1>
-
-        <a class="enllac" href="/Objectes/objectes.html">Comprovar DNI (Objectes)</a>
-    </section>
-
-        <!-- Classes i Punts -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Classes i Punts</h1>
-
-        <a class="enllac" href="classesPunts.html">Classes i Punts</a>
-    </section>
-
-
-            <!-- Classes i Punts -->
-    <section class="seccio">
-        <h1 class="titol-seccio">Visualitza Metodes d'Ordednació</h1>
-
-        <a class="enllac" href="visualitzarMetodesDordenacio.html">Ordenació</a>
-    </section>
-
-
-
-    <!-- SCRIPTS -->
-    <script src="js/app.383944f7.js"></script>
-    <script src="script.js"></script>
-
-
-    <!-- 
-    git add . 
-    git commit -m "canvis"
-    git push deploy main -v
-     -->
-
+</main>
 </body>
 </html>
