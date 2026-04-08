@@ -1,126 +1,986 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Index Professional Dashboard</title>
-<style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-        font-family: 'Inter', sans-serif;
-        background: #121212;
-        color: #f3f4f6;
-        padding: 2rem;
-        line-height: 1.5;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Professional Fosc</title>
+    <style>
+        /* RESET */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1f2937; /* gris fosc */
+            color: #f3f4f6;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        header h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #facc15; /* groc brillant */
+            text-shadow: 1px 1px 5px #000;
+        }
 
-    header h1 {
-        text-align: center;
-        font-size: 2.5rem;
-        color: #facc15;
-        text-shadow: 1px 1px 5px #000;
-        margin-bottom: 3rem;
-    }
+        h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #fbbf24;
+            padding-bottom: 0.5rem;
+            color: #fbbf24;
+        }
 
-    h2.bloc-title {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-        color: #fbbf24;
-        border-bottom: 2px solid #fbbf24;
-        padding-bottom: 0.5rem;
-    }
+        a {
+            display: block;
+            text-decoration: none;
+            color: #f3f4f6;
+            margin-bottom: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            background: #f59e0b;
+            color: #1f2937;
+            transform: translateX(5px);
+        }
 
-    .sections {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-    }
+        .bloc {
+            margin-bottom: 3rem;
+        }
 
-    .card {
-        position: relative;
-        padding: 1.5rem;
-        border-radius: 12px;
-        background: #1f2937;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        display: flex;
-        flex-direction: column;
-    }
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
 
-    .card:hover {
-        transform: translateY(-5px) scale(1.03);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-    }
+        .card {
+            background: #374151; /* gris fosc de la card */
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
 
-    .card::before {
-        content:'';
-        position: absolute;
-        width: 150%;
-        height: 150%;
-        top: -25%;
-        left: -25%;
-        background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(34,197,94,0.15));
-        transform: rotate(25deg);
-        z-index: 0;
-    }
+        .card::before {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(34,197,94,0.2));
+            transform: rotate(25deg);
+            z-index: 0;
+        }
 
-    .card-header {
-        font-weight: bold;
-        font-size: 1.1rem;
-        margin-bottom: 0.75rem;
-        z-index: 1;
-        color: #fcd34d;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+        .card-header {
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            color: #fcd34d;
+            z-index: 1;
+        }
 
-    .badge {
-        background: #f59e0b;
-        color: #1f2937;
-        padding: 0.2rem 0.5rem;
-        border-radius: 6px;
-        font-size: 0.75rem;
-        font-weight: bold;
-    }
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
 
-    .card-content {
-        display: flex;
-        flex-direction: column;
-        z-index: 1;
-    }
+        .sub-div {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: #4b5563;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
 
-    a {
-        text-decoration: none;
-        color: #f3f4f6;
-        padding: 0.3rem 0.5rem;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-        margin-bottom: 0.3rem;
-    }
+        .bloc-number {
+            font-size: 1rem;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
-    a:hover {
-        background: #f59e0b;
-        color: #1f2937;
-        transform: translateX(5px);
-    }
+        .loader {
+  --duration: 3s;
+  --primary: rgb(0, 90, 53);
+  --primary-light: #001b18;
+  --primary-rgba: rgba(96, 125, 211, 0);
+  width: 200px;
+  height: 320px;
+  position: relative;
+  transform-style: preserve-3d;
+}
 
-    .sub-div {
-        margin-top: 0.5rem;
-        padding: 0.5rem;
-        background: #374151;
-        border-radius: 6px;
-        font-size: 0.9rem;
-    }
+@media (max-width: 480px) {
+  .loader {
+    zoom: 0.44;
+  }
+}
 
-    .icon {
-        margin-right: 0.5rem;
-    }
+.loader:before,
+.loader:after {
+  --r: 20.5deg;
+  content: "";
+  width: 320px;
+  height: 140px;
+  position: absolute;
+  right: 32%;
+  bottom: -11px;
+  /* change the back groung color on switching from light to dark mood */
+  background: #e8e8e8;
+  transform: translateZ(200px) rotate(var(--r));
+  -webkit-animation: mask var(--duration) linear forwards infinite;
+  animation: mask var(--duration) linear forwards infinite;
+}
 
-</style>
+.loader:after {
+  --r: -20.5deg;
+  right: auto;
+  left: 32%;
+}
+
+.loader .ground {
+  position: absolute;
+  left: -50px;
+  bottom: -120px;
+  transform-style: preserve-3d;
+  transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+}
+
+.loader .ground div {
+  transform: rotateX(90deg) rotateY(0deg) translate(-48px, -120px)
+    translateZ(100px) scale(0);
+  width: 200px;
+  height: 200px;
+  background: var(--primary);
+  background: linear-gradient(
+    45deg,
+    var(--primary) 0%,
+    var(--primary) 50%,
+    var(--primary-light) 50%,
+    var(--primary-light) 100%
+  );
+  transform-style: preserve-3d;
+  -webkit-animation: ground var(--duration) linear forwards infinite;
+  animation: ground var(--duration) linear forwards infinite;
+}
+
+.loader .ground div:before,
+.loader .ground div:after {
+  --rx: 90deg;
+  --ry: 0deg;
+  --x: 44px;
+  --y: 162px;
+  --z: -50px;
+  content: "";
+  width: 156px;
+  height: 300px;
+  opacity: 0;
+  background: linear-gradient(var(--primary), var(--primary-rgba));
+  position: absolute;
+  transform: rotateX(var(--rx)) rotateY(var(--ry)) translate(var(--x), var(--y))
+    translateZ(var(--z));
+  -webkit-animation: ground-shine var(--duration) linear forwards infinite;
+  animation: ground-shine var(--duration) linear forwards infinite;
+}
+
+.loader .ground div:after {
+  --rx: 90deg;
+  --ry: 90deg;
+  --x: 0;
+  --y: 177px;
+  --z: 150px;
+}
+
+.loader .box {
+  --x: 0;
+  --y: 0;
+  position: absolute;
+  -webkit-animation: var(--duration) linear forwards infinite;
+  animation: var(--duration) linear forwards infinite;
+  transform: translate(var(--x), var(--y));
+}
+
+.loader .box div {
+  background-color: var(--primary);
+  width: 48px;
+  height: 48px;
+  position: relative;
+  transform-style: preserve-3d;
+  -webkit-animation: var(--duration) ease forwards infinite;
+  animation: var(--duration) ease forwards infinite;
+  transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+}
+
+.loader .box div:before,
+.loader .box div:after {
+  --rx: 90deg;
+  --ry: 0deg;
+  --z: 24px;
+  --y: -24px;
+  --x: 0;
+  content: "";
+  position: absolute;
+  background-color: inherit;
+  width: inherit;
+  height: inherit;
+  transform: rotateX(var(--rx)) rotateY(var(--ry)) translate(var(--x), var(--y))
+    translateZ(var(--z));
+  filter: brightness(var(--b, 1.2));
+}
+
+.loader .box div:after {
+  --rx: 0deg;
+  --ry: 90deg;
+  --x: 24px;
+  --y: 0;
+  --b: 1.4;
+}
+
+.loader .box.box0 {
+  --x: -220px;
+  --y: -120px;
+  left: 58px;
+  top: 108px;
+}
+
+.loader .box.box1 {
+  --x: -260px;
+  --y: 120px;
+  left: 25px;
+  top: 120px;
+}
+
+.loader .box.box2 {
+  --x: 120px;
+  --y: -190px;
+  left: 58px;
+  top: 64px;
+}
+
+.loader .box.box3 {
+  --x: 280px;
+  --y: -40px;
+  left: 91px;
+  top: 120px;
+}
+
+.loader .box.box4 {
+  --x: 60px;
+  --y: 200px;
+  left: 58px;
+  top: 132px;
+}
+
+.loader .box.box5 {
+  --x: -220px;
+  --y: -120px;
+  left: 25px;
+  top: 76px;
+}
+
+.loader .box.box6 {
+  --x: -260px;
+  --y: 120px;
+  left: 91px;
+  top: 76px;
+}
+
+.loader .box.box7 {
+  --x: -240px;
+  --y: 200px;
+  left: 58px;
+  top: 87px;
+}
+
+.loader .box0 {
+  -webkit-animation-name: box-move0;
+  animation-name: box-move0;
+}
+
+.loader .box0 div {
+  -webkit-animation-name: box-scale0;
+  animation-name: box-scale0;
+}
+
+.loader .box1 {
+  -webkit-animation-name: box-move1;
+  animation-name: box-move1;
+}
+
+.loader .box1 div {
+  -webkit-animation-name: box-scale1;
+  animation-name: box-scale1;
+}
+
+.loader .box2 {
+  -webkit-animation-name: box-move2;
+  animation-name: box-move2;
+}
+
+.loader .box2 div {
+  -webkit-animation-name: box-scale2;
+  animation-name: box-scale2;
+}
+
+.loader .box3 {
+  -webkit-animation-name: box-move3;
+  animation-name: box-move3;
+}
+
+.loader .box3 div {
+  -webkit-animation-name: box-scale3;
+  animation-name: box-scale3;
+}
+
+.loader .box4 {
+  -webkit-animation-name: box-move4;
+  animation-name: box-move4;
+}
+
+.loader .box4 div {
+  -webkit-animation-name: box-scale4;
+  animation-name: box-scale4;
+}
+
+.loader .box5 {
+  -webkit-animation-name: box-move5;
+  animation-name: box-move5;
+}
+
+.loader .box5 div {
+  -webkit-animation-name: box-scale5;
+  animation-name: box-scale5;
+}
+
+.loader .box6 {
+  -webkit-animation-name: box-move6;
+  animation-name: box-move6;
+}
+
+.loader .box6 div {
+  -webkit-animation-name: box-scale6;
+  animation-name: box-scale6;
+}
+
+.loader .box7 {
+  -webkit-animation-name: box-move7;
+  animation-name: box-move7;
+}
+
+.loader .box7 div {
+  -webkit-animation-name: box-scale7;
+  animation-name: box-scale7;
+}
+
+@-webkit-keyframes box-move0 {
+  12% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  25%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@keyframes box-move0 {
+  12% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  25%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@-webkit-keyframes box-scale0 {
+  6% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  14%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@keyframes box-scale0 {
+  6% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  14%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@-webkit-keyframes box-move1 {
+  16% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  29%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@keyframes box-move1 {
+  16% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  29%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@-webkit-keyframes box-scale1 {
+  10% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  18%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@keyframes box-scale1 {
+  10% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  18%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@-webkit-keyframes box-move2 {
+  20% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  33%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@keyframes box-move2 {
+  20% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  33%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@-webkit-keyframes box-scale2 {
+  14% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  22%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@keyframes box-scale2 {
+  14% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  22%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@-webkit-keyframes box-move3 {
+  24% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  37%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@keyframes box-move3 {
+  24% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  37%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@-webkit-keyframes box-scale3 {
+  18% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  26%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@keyframes box-scale3 {
+  18% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  26%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@-webkit-keyframes box-move4 {
+  28% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  41%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@keyframes box-move4 {
+  28% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  41%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@-webkit-keyframes box-scale4 {
+  22% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  30%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@keyframes box-scale4 {
+  22% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  30%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@-webkit-keyframes box-move5 {
+  32% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  45%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@keyframes box-move5 {
+  32% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  45%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@-webkit-keyframes box-scale5 {
+  26% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  34%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@keyframes box-scale5 {
+  26% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  34%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@-webkit-keyframes box-move6 {
+  36% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  49%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@keyframes box-move6 {
+  36% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  49%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@-webkit-keyframes box-scale6 {
+  30% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  38%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@keyframes box-scale6 {
+  30% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  38%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@-webkit-keyframes box-move7 {
+  40% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  53%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@keyframes box-move7 {
+  40% {
+    transform: translate(var(--x), var(--y));
+  }
+
+  53%,
+  52% {
+    transform: translate(0, 0);
+  }
+
+  80% {
+    transform: translate(0, -32px);
+  }
+
+  90%,
+  100% {
+    transform: translate(0, 188px);
+  }
+}
+
+@-webkit-keyframes box-scale7 {
+  34% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  42%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@keyframes box-scale7 {
+  34% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+  }
+
+  42%,
+  100% {
+    transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+  }
+}
+
+@-webkit-keyframes ground {
+  0%,
+  65% {
+    transform: rotateX(90deg) rotateY(0deg) translate(-48px, -120px)
+      translateZ(100px) scale(0);
+  }
+
+  75%,
+  90% {
+    transform: rotateX(90deg) rotateY(0deg) translate(-48px, -120px)
+      translateZ(100px) scale(1);
+  }
+
+  100% {
+    transform: rotateX(90deg) rotateY(0deg) translate(-48px, -120px)
+      translateZ(100px) scale(0);
+  }
+}
+
+@keyframes ground {
+  0%,
+  65% {
+    transform: rotateX(90deg) rotateY(0deg) translate(-48px, -120px)
+      translateZ(100px) scale(0);
+  }
+
+  75%,
+  90% {
+    transform: rotateX(90deg) rotateY(0deg) translate(-48px, -120px)
+      translateZ(100px) scale(1);
+  }
+
+  100% {
+    transform: rotateX(90deg) rotateY(0deg) translate(-48px, -120px)
+      translateZ(100px) scale(0);
+  }
+}
+
+@-webkit-keyframes ground-shine {
+  0%,
+  70% {
+    opacity: 0;
+  }
+
+  75%,
+  87% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes ground-shine {
+  0%,
+  70% {
+    opacity: 0;
+  }
+
+  75%,
+  87% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes mask {
+  0%,
+  65% {
+    opacity: 0;
+  }
+
+  66%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes mask {
+  0%,
+  65% {
+    opacity: 0;
+  }
+
+  66%,
+  100% {
+    opacity: 1;
+  }
+}
+
+    </style>
 </head>
 <body>
+
 <header>
     <h1>Benvinguts a la Meva Pàgina Web</h1>
 </header>
@@ -129,71 +989,60 @@
 
     <!-- BLOC 1 -->
     <div class="bloc">
-        <h2 class="bloc-title">BLOC 1 - ESTRUCTURES</h2>
+        <h2>BLOC 1</h2>
         <div class="sections">
-
             <div class="card">
-                <div class="card-header">
-                    <span>📊 Estructures de Control</span>
-                    <span class="badge">5 items</span>
-                </div>
+                <div class="card-header">Estructures de Control</div>
                 <div class="card-content">
                     <a href="ExercicisEstructureControl.html">Estructures 1</a>
                     <a href="EstrcturesControl2.html">Estructures 2</a>
                     <a href="EstructureControl3.html">Estructures 3</a>
                     <a href="EstructureControl4.html">Estructures 4</a>
-                    <div class="sub-div">Sub-div: informació addicional amb tips</div>
-                    <div class="sub-div">Sub-div: notes de repàs</div>
+                    <div class="sub-div">Sub-div extra amb informació addicional</div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <span>🔒 Contrasenya Segura</span>
-                    <span class="badge">2 variants</span>
-                </div>
+                <div class="card-header">Contrasenya Segura</div>
                 <div class="card-content">
                     <a href="contrsenyasegura.html">Contrasenya Segura</a>
-                    <a href="contrsenyasegura.html">Amb Expressions Regulars</a>
-                    <div class="sub-div">Tip: reforça seguretat amb símbols</div>
+                    <a href="contrsenyasegura.html">Contrasenya amb Expressions Regulars</a>
+                    <div class="sub-div">Tip extra: Seguretat reforçada</div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <span>📅 Data de Naixement</span>
-                    <span class="badge">1 item</span>
-                </div>
+                <div class="card-header">Data de Naixement</div>
                 <div class="card-content">
                     <a href="datanaixament.html">La data de naixement</a>
-                    <div class="sub-div">Sub-div: recordar aniversaris especials</div>
+                    <div class="sub-div">Sub-div per dates especials</div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <span>🗂 Arrays</span>
-                    <span class="badge">1 item</span>
-                </div>
+                <div class="card-header">Arrays</div>
                 <div class="card-content">
                     <a href="arrays.html">Arrays</a>
                     <div class="sub-div">Sub-div amb informació extra</div>
                 </div>
             </div>
 
+            <div class="card">
+                <div class="card-header">Factures</div>
+                <div class="card-content">
+                    <a href="Factura.html">Factura Producte</a>
+                    <div class="sub-div">Sub-div amb dades fiscals</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- BLOC 2 -->
     <div class="bloc">
-        <h2 class="bloc-title">BLOC 2 - TOOLS</h2>
+        <h2>BLOC 2</h2>
         <div class="sections">
-
             <div class="card">
-                <div class="card-header">
-                    <span>✅ To Do</span>
-                    <span class="badge">1 item</span>
-                </div>
+                <div class="card-header">To Do</div>
                 <div class="card-content">
                     <a href="TO-DO.html">To Do</a>
                     <div class="sub-div">Prioritats destacades</div>
@@ -201,52 +1050,37 @@
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <span>🎨 Vocació d'Artista</span>
-                    <span class="badge">1 projecte</span>
-                </div>
+                <div class="card-header">Vocació d'Artista</div>
                 <div class="card-content">
                     <a href="voaciódartista/vocacióDartista.html">Vocació d'artista</a>
                     <div class="sub-div">Projectes artístics</div>
-                    <div class="sub-div">Inspiració i notes</div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <span>🛠 ITV</span>
-                    <span class="badge">1 test</span>
-                </div>
+                <div class="card-header">ITV</div>
                 <div class="card-content">
                     <a href="jquery.html">ITV</a>
-                    <div class="sub-div">Comprovacions i informes</div>
+                    <div class="sub-div">Tests i comprovacions</div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <span>🖱 Drag&Drop</span>
-                    <span class="badge">1 zona</span>
-                </div>
+                <div class="card-header">Drag&Drop</div>
                 <div class="card-content">
                     <a href="Drag&Drop.html">Drag&Drop</a>
                     <div class="sub-div">Zones interactives</div>
-                    <div class="sub-div">Sub-div addicional</div>
                 </div>
             </div>
-
         </div>
     </div>
 
     <!-- BLOC 3 -->
     <div class="bloc">
-        <h2 class="bloc-title">BLOC 3 - OBJECTES I CLASSES</h2>
+        <h2>BLOC 3</h2>
         <div class="sections">
             <div class="card">
-                <div class="card-header">
-                    <span>📦 Objectes</span>
-                    <span class="badge">1 item</span>
-                </div>
+                <div class="card-header">Objectes</div>
                 <div class="card-content">
                     <a href="/Objectes/objectes.html">Comprovar DNI</a>
                     <div class="sub-div">Informació addicional</div>
@@ -254,62 +1088,99 @@
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <span>📚 Classes i Objectes</span>
-                    <span class="badge">1 item</span>
-                </div>
+                <div class="card-header">Classes i Objectes</div>
                 <div class="card-content">
                     <a href="classesPunts.html">Classes i Punts</a>
                     <div class="sub-div">Detalls sobre les classes</div>
-                    <div class="sub-div">Sub-div addicional</div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <span>⚙ Visualitza Metodes d'Ordednació</span>
-                    <span class="badge">1 item</span>
-                </div>
+                <div class="card-header">Visualitza Metodes d'Ordednació</div>
                 <div class="card-content">
                     <a href="visualitzarMetodesDordenacio.html">Ordenació</a>
                     <div class="sub-div">Sub-div amb consells</div>
-                    <div class="sub-div">Mini-tips</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- BLOC 4 -->
+    <!--  VUE -->
     <div class="bloc">
-        <h2 class="bloc-title">BLOC 4 - VUE PROJECTS</h2>
+        <h2> VUE</h2>
         <div class="sections">
-
             <div class="card">
-                <div class="card-header">
-                    <span>🌐 VUE APP</span>
-                    <span class="badge">Projecte</span>
-                </div>
+                <div class="card-header">VUE</div>
                 <div class="card-content">
                     <a href="dist/index.html">Exercici VUE1/VUE2</a>
                     <div class="sub-div">Projectes Vue</div>
-                    <div class="sub-div">Documentació</div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <span>📜 Directives VUE</span>
-                    <span class="badge">Projecte</span>
-                </div>
+                <div class="card-header">Visualitza Metodes d'Ordednació (VUE)</div>
                 <div class="card-content">
                     <a href="distDirectives/index.html">Ordenació</a>
                     <div class="sub-div">Directives Vue</div>
-                    <div class="sub-div">Mini-tutorial</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!--  VUE -->
+    <div class="bloc">
+        <h2> BLOC 4</h2>
+        <div class="sections">
+           <!--  <div class="card">
+                <div class="card-header">VUE</div>
+                <div class="card-content">
+                    <a href="dist/index.html">Exercici VUE1/VUE2</a>
+                    <div class="sub-div">Projectes Vue</div>
                 </div>
             </div>
 
+            <div class="card">
+                <div class="card-header">Visualitza Metodes d'Ordednació (VUE)</div>
+                <div class="card-content">
+                    <a href="distDirectives/index.html">Ordenació</a>
+                    <div class="sub-div">Directives Vue</div>
+                </div>
+            </div> -->
+
+            <div class="loader">
+  <div class="box box0">
+    <div></div>
+  </div>
+  <div class="box box1">
+    <div></div>
+  </div>
+  <div class="box box2">
+    <div></div>
+  </div>
+  <div class="box box3">
+    <div></div>
+  </div>
+  <div class="box box4">
+    <div></div>
+  </div>
+  <div class="box box5">
+    <div></div>
+  </div>
+  <div class="box box6">
+    <div></div>
+  </div>
+  <div class="box box7">
+    <div></div>
+  </div>
+  <div class="ground">
+    <div></div>
+  </div>
+</div>
+
+
         </div>
     </div>
+
 
 </main>
 </body>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<form id="form">
+    <label>Nom del païs en minuscula</label>
+    <input type="text" id="pais" name="País" required>
+    <button type="submit">Enviar</button>
+</form>
+
+<hr>
+
+<div class="resposta"></div>
+
+<script>
+
+const form = document.getElementById("form");
+const pais = document.getElementById("pais");
+const resposta = document.querySelector(".resposta");
+
+const API_KEY = "f800470e72f31dea14740a9b39f4e2c2";
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const paisNom = pais.value.trim();
+    if (!paisNom) return;
+
+    fetch(`https://restcountries.com/v3.1/name/${paisNom}`)
+    .then(response => response.json())
+    .then(data => {
+        const country = data[0]; 
+        const moneda = Object.values(country.currencies)[0];
+        const nomMoneda = moneda.name;
+        const capital = country.capital[0];
+
+        resposta.innerHTML = `
+            <p>Capital: ${capital}</p>
+            <p>Poblacio: ${country.population}</p>
+            <p>Regio: ${country.region}</p>
+            <p>Llenguatges: ${Object.values(country.languages).join(", ")}</p>
+            <p>Subregió del País: ${country.subregion}</p>
+            <p>Zona Horaria: ${country.timezones[0]}</p>
+            <p>Moneda: ${nomMoneda}</p>
+            <img src="${country.flags.png}" alt="Bandera de ${country.name.common}" width="150">
+        `;
+
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=${API_KEY}`)
+            .then(res => res.json())
+            .then(weather => {
+                const temp = weather.main.temp;
+                const clima = weather.weather[0].main;
+
+                resposta.innerHTML += `
+                    <p><strong>Clima en ${capital}:</strong> ${clima}</p>
+                    <p><strong>Temperatura:</strong> ${temp} °C</p>
+                `;
+            })
+
+    })
+    .catch(() => {
+        resposta.innerHTML = `<p>No Trobat</p>`;
+    });
+});
+</script>
+
+</body>
+</html>
